@@ -1,15 +1,10 @@
-import {malService} from "../services/mal.service.ts";
+import {anilistService} from "../services/anilist.service.ts";
 
 export class Animes {
-    public lista: {} = {};
 
-    constructor() {
-        this.getAnimes();
-    }
-
-    async getAnimes() {
-        const response = await malService.getAnimes();
-        this.lista = response.data.data;
+    async getAnimes(page = 1) {
+        const data = await anilistService.getAnimes(page);
+        return data.Page.media;
 
     }
 }

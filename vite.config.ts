@@ -9,13 +9,4 @@ export default defineConfig({
       autoImport: true,
     }),
   ],
-  server: {
-    proxy: {
-      '/mal-api': {
-        target: 'https://api.myanimelist.net/v2',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/mal-api/, ''),
-      },
-    },
-  },
 })
