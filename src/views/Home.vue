@@ -3,18 +3,20 @@ import {Animes} from "../composables/animes.ts";
 import {onMounted, ref} from "vue";
 
 const composableAnimes = new Animes();
-const animes = ref({})
+const dadosCarregados = ref(false);
+const animes = ref({});
 
 onMounted(async () => {
-  animes.value = await composableAnimes.getAnimes();
-  console.log(animes.value)
+  await composableAnimes.getAnimes();
+  animes.value = composableAnimes.animes;
+  dadosCarregados.value = true;
 })
 
 </script>
 
 <template>
   <h1>pickme</h1>
-  <v-row>
+  <v-row v-if="dadosCarregados">
     <v-col cols="12" md="4" v-for="anime in animes" :key="anime.id">
       <v-card
           class="mx-auto"
