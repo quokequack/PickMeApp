@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import {Animes} from "../composables/animes.ts";
+import { useAnime } from '../composables/Anime.ts';
 import {onMounted, ref} from "vue";
+import {Jogo} from "../entities/Jogo.ts";
 
-const composableAnimes = new Animes();
 const dadosCarregados = ref(false);
+const animeComposable = new useAnime();
 const animes = ref({});
 
+
+function comecarJogo() {
+  const jogo = new Jogo();
+  console.log(jogo);
+}
+
+
 onMounted(async () => {
-  await composableAnimes.getAnimes();
-  animes.value = composableAnimes.animes;
+  await animeComposable.getAnimes();
+  animes.value = animeComposable.lista;
   dadosCarregados.value = true;
 })
 
@@ -17,19 +25,7 @@ onMounted(async () => {
 <template>
   <h1>pickme</h1>
   <v-row v-if="dadosCarregados">
-    <v-col cols="12" md="4" v-for="anime in animes" :key="anime.id">
-      <v-card
-          class="mx-auto"
-          max-width="400">
-        <v-img
-            class="align-end text-white"
-            height="200"
-            :src="anime.coverImage.extraLarge"
-            cover>
-          <v-card-title>{{ anime.title.romaji }}</v-card-title>
-        </v-img>
-      </v-card>
-    </v-col>
+    <v-btn @click="comecarJogo"> COMEÇAR </v-btn>
   </v-row>
 </template>
 
