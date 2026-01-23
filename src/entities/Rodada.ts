@@ -27,5 +27,9 @@ export class Rodada {
         return this.escolhaAtual;
     }
 
+    public getId() {
+        return this.id;
+    }
+
 
 }

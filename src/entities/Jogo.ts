@@ -5,7 +5,8 @@ export class Jogo {
     animes : Anime[];
     qtdRodadas: null|number = 0;
     rodadas: Rodada[] = [];
-    rodadaAtual: null|number = null;
+    rodadaAtual: null|Rodada = null;
+    vencedor: null|Anime = null;
 
     constructor(animes: Anime[]) {
         this.animes = animes;
@@ -15,25 +16,27 @@ export class Jogo {
 
     private setQtdRodadas(){
         const qtdAnimes = this.animes.length;
-        this.qtdRodadas = (qtdAnimes - 2) / 2;
+        this.qtdRodadas = qtdAnimes / 2;
     }
 
     private primeiraRodada(rodada: Rodada){
-        this.rodadaAtual = 1;
-        rodada.setId(this.rodadaAtual);
-        rodada.setOpcoes(this.animes.slice(0, 2))
+        this.rodadaAtual = rodada;
+        rodada.setId(1);
+        const op1 = this.animes.shift();
+        const op2 = this.animes.shift();
+        rodada.setOpcoes([op1, op2])
         this.rodadas.push(rodada);
         return rodada;
     }
 
     private acabou() {
-        return this.qtdRodadas == this.rodadaAtual || this.animes.length == 0;
+        return this.qtdRodadas == this.rodadaAtual?.getId() || this.animes.length == 0;
     }
 
     public novaRodada(): Rodada|null {
-
         if(this.acabou()){
-            return null;
+            this.vencedor = this.rodadaAtual?.getEscolhaAtual();
+            return this.vencedor;
         }
 
         const rodada = new Rodada();
@@ -41,8 +44,9 @@ export class Jogo {
             return this.primeiraRodada(rodada);
         }
 
-        this.rodadaAtual++;
-        rodada.setId(this.rodadaAtual);
+
+        rodada.setId((this.rodadaAtual.id + 1))
+        this.rodadaAtual = rodada;
         const rodadaAnterior = this.rodadas[this.rodadas.length - 1];
         const escolhaRodadaAnterior = rodadaAnterior.getEscolhaAtual();
         rodada.setEscolhaAnterior(escolhaRodadaAnterior);
@@ -52,8 +56,7 @@ export class Jogo {
     }
 
     public escolhe(escolha: Anime) : boolean {
-        const rodadaAtual = this.rodadas[this.rodadas.length - 1];
-        rodadaAtual?.setEscolhaAtual(escolha);
+        this.rodadaAtual.setEscolhaAtual(escolha);
         return true;
     }
 

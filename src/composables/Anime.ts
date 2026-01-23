@@ -2,7 +2,7 @@ import {anilistService} from "../services/anilist.service.ts";
 import Swal from "sweetalert2";
 
 export class useAnime implements IAnime{
-    lista : IAnime[];
+    lista : Anime[];
 
     async getAnimes(page = 1) {
         try{
@@ -16,5 +16,11 @@ export class useAnime implements IAnime{
                 text: `${error}`,
             })
         }
+    }
+
+    embaralhar(){
+        this.lista = this.lista.map((valor) => ({ val: valor, key: Math.random()}))
+            .sort((a, b) => a.key - b.key)
+            .map((o) => o.val);
     }
 }
