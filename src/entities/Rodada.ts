@@ -2,17 +2,17 @@ import { Anime } from "./Anime";
 
 export class Rodada {
     private id: number = 0;
-    private escolhaAnterior: null|Anime = null;
-    private opcoes: null|Anime[] = null;
-    private escolhaAtual: null|Anime = null;
+    private escolhaAnterior: Anime|null = null;
+    private opcoes: Anime[]|null = null;
+    private escolhaAtual: Anime|null = null;
 
 
     public setOpcoes(opcoes: Anime[]) {
         this.opcoes = opcoes;
     }
 
-    public setEscolhaAnterior(escolhaAnterior:Anime) {
-        this.escolhaAnterior = escolhaAnterior;
+    public setEscolhaAnterior(escolha:Anime) {
+        this.escolhaAnterior = escolha;
     }
 
     public setId(id:number) {
@@ -29,6 +29,14 @@ export class Rodada {
 
     public getId() {
         return this.id;
+    }
+
+    public getOpcoes() {
+        return this.opcoes;
+    }
+
+    public getEscolhaAnterior() {
+        return this.escolhaAnterior;
     }
 
 

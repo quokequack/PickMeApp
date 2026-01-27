@@ -23,7 +23,6 @@ export const useAnimeDataStore = defineStore('animeDataStore', () =>
 
         try{
             const data = await anilistService.getAnimes(page);
-            console.log(data);
             initAnime(data.Page.media);
             lastFetch.value = now;
         } catch (error) {

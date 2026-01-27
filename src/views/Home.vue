@@ -81,14 +81,14 @@ onMounted(async () => {
       <div class="round-header">
         <div class="round-badge">
           <span class="round-label">RODADA</span>
-          <span class="round-number">{{ jogo.rodadaAtual.id }}</span>
+          <span class="round-number">{{ jogo.rodadaAtual?.getId() }}</span>
         </div>
         <p class="round-instruction">Escolha seu favorito!</p>
       </div>
 
       <div class="battle-arena">
         <div
-          v-for="(opcao, index) in jogo.rodadaAtual.opcoes"
+          v-for="(opcao, index) in jogo.rodadaAtual?.getOpcoes()"
           :key="opcao.id"
           class="anime-card"
           :class="{ 'card-left': index === 0, 'card-right': index === 1 }"
@@ -140,10 +140,10 @@ onMounted(async () => {
 
         <div class="winner-card">
           <div class="winner-glow"></div>
-          <img :src="jogo.vencedor.coverImage.extraLarge" :alt="jogo.vencedor.title.romaji" class="winner-image" />
+          <img :src="jogo?.vencedor?.coverImage?.extraLarge" :alt="jogo?.vencedor?.title?.romaji" class="winner-image" />
           <div class="winner-info">
-            <h2 class="winner-title">{{ jogo.vencedor.title.romaji }}</h2>
-            <p v-if="jogo.vencedor.title.english" class="winner-subtitle">{{ jogo.vencedor.title.english }}</p>
+            <h2 class="winner-title">{{ jogo?.vencedor?.title?.romaji }}</h2>
+            <p v-if="jogo?.vencedor?.title?.english" class="winner-subtitle">{{ jogo?.vencedor?.title?.english }}</p>
           </div>
         </div>
 

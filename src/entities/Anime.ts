@@ -2,12 +2,13 @@ export class Anime {
     id: number|null = null;
     title: {
         english: string;
-        romanji: string;
+        romaji: string;
     }|null = null;
+    description: string|null = null;
     coverImage: {
-        medium: null|string;
-        large: null|string;
-        extraLarge: null|string;
+        medium: null|string|undefined;
+        large: null|string|undefined;
+        extraLarge: null|string|undefined;
     }|null = null;
     
 }
