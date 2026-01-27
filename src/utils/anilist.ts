@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const anilist = axios.create({
-    baseURL: '/anilist-api',
+    baseURL: 'https://graphql.anilist.co',
     timeout: 10000,
 });
 
