@@ -7,8 +7,6 @@ import type {Anime} from "../entities/Anime.ts";
 export const useAnimeDataStore = defineStore('animeDataStore', () =>
 {
     const lista = ref<Anime[]>();
-    const lastFetch = ref<number|null>(null);
-    const cacheDuration = 60 * 60 * 1000;
 
     function initAnime(data: any) {
         lista.value = data;
@@ -16,15 +14,9 @@ export const useAnimeDataStore = defineStore('animeDataStore', () =>
 
     async function getAnimes(page = 1) {
 
-        const now = Date.now();
-        if(lista.value && lastFetch.value && (now - lastFetch.value) < cacheDuration){
-            return;
-        }
-
         try{
             const data = await anilistService.getAnimes(page);
             initAnime(data.Page.media);
-            lastFetch.value = now;
         } catch (error) {
             console.error(error);
             await Swal.fire({
@@ -44,7 +36,6 @@ export const useAnimeDataStore = defineStore('animeDataStore', () =>
 
     return {
         lista,
-        lastFetch,
         getAnimes,
         embaralhar,
     }
