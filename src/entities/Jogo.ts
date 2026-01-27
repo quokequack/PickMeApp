@@ -30,7 +30,8 @@ export class Jogo {
     }
 
     private acabou() {
-        return this.qtdRodadas == this.rodadaAtual?.getId() || this.animes.length == 0;
+        // @ts-ignore
+        return this.animes.length == 0;
     }
 
     public novaRodada(): Rodada|null {

@@ -9,4 +9,14 @@ export default defineConfig({
       autoImport: true,
     }),
   ],
-})
+  server: {
+    proxy: {
+      '/anilist-api': {
+        target: 'https://graphql.anilist.co',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/anilist-api/, ''),
+      },
+
+    }
+  }
+});

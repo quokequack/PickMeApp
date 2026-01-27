@@ -15,6 +15,7 @@ async function getAnimes(page = 1) {
             romaji
             english
           }
+          description
           coverImage { 
             extraLarge
           }
@@ -23,7 +24,7 @@ async function getAnimes(page = 1) {
     }
     `;
 
-    const { data } = await anilist.post('',{
+    const { data } = await anilist.post('/anime',{
         query,
         variables: {page}
     }, {

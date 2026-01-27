@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const anilist = axios.create({
-    baseURL: import.meta.env.VITE_ANILIST_URL,
+    baseURL: '/anilist-api',
     timeout: 10000,
 });
 
