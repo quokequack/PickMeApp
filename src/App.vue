@@ -1,14 +1,12 @@
 <script setup lang="ts">
+import Footer from "./components/Footer.vue";
 </script>
 
 <template>
-  <v-app>
-    <v-main>
-      <div id="app">
-        <router-view />
-      </div>
-    </v-main>
-  </v-app>
+  <div id="app">
+    <router-view />
+  </div>
+  <Footer />
 </template>
 
 <style>
